@@ -190,106 +190,22 @@ First, we will check for spelling differences and see if that fixes why we have 
 
 ```r
 midterm_data_ethan37_1 %>%
+  group_by(provstate, city, POPESTIMATE2013, POPESTIMATE2014, POPESTIMATE2015, POPESTIMATE2016) %>%
+  summarise()%>%
   filter(is.na(POPESTIMATE2013) | is.na(POPESTIMATE2014) | is.na(POPESTIMATE2015) | is.na(POPESTIMATE2016))
 ```
 
 ```
-##   iyear imonth iday      provstate             city latitude  longitude
-## 1  2015      6   26 South Carolina      Warrenville 33.50506  -81.81826
-## 2  2016      1    2         Oregon        Princeton 43.26584 -118.84408
-## 3  2016      2   28     California Lake Los Angeles 34.60598 -117.82995
-## 4  2016      8    9       New York         New City 41.16624  -73.99150
-## 5  2016      8    9       New York         New City 41.16240  -74.00490
-##   vicinity
-## 1        0
-## 2        0
-## 3        0
-## 4        0
-## 5        0
-##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        summary
-## 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              06/26/2015: Assailants set fire to the Glover Grove Missionary Baptist Church in Warrenville, South Carolina, United States. There were no reported casualties in the attack. No group claimed responsibility for the incident.
-## 2 01/02/2016: At least 12 armed assailants seized the Malheur National Wildlife Refuge headquarters in Princeton, Oregon, United States. On January 26, 2016, a leader of the group was killed, Ryan Bundy was wounded, and seven leaders, including Ammon and Ryan Bundy, were arrested in a confrontation with authorities approximately 45 miles away from the refuge. The last four assailants at the refuge were arrested on February 11, 2016. Citizens for Constitutional Freedom claimed responsibility for the incident and demanded that federal grounds be returned to the ranchers of Harney County. The group also stated that the occupation was carried out in protest to the five year sentence of Dwight and Steven Hammond, two ranchers convicted of arson of federal land.
-## 3                                                                                                                                                                                                                                                                              02/28/2016: Three assailants armed with knives attacked a group of Hispanic teenagers playing soccer at Stephen Sorensen Park in Lake Los Angeles, California, United States. At least two people suffered minor injuries in the assault. The three assailants, identified as Ian Justine Plankey, Richard Lawrence Daulton, and Kevin Matthew Stewart, were arrested following the incident. During the attack, they shouted white supremacist statements and racial slurs, including "Heil Hitler, AV Skins."
-## 4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      08/09/2016: Assailants threw a firecracker at the house of Rabbi Avremel Kotlarsky in New City, New York, United States. There were no reported casualties in the attack. This was one of two coordinated attacks on the same night. No group claimed responsibility for the incidents.
-## 5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     08/09/2016: Assailants threw a firecracker at the house of Rabbi Simcha Morgenstern in New City, New York, United States. There were no reported casualties in the attack. This was one of two coordinated attacks on the same night. No group claimed responsibility for the incidents.
-##   doubtterr multiple success suicide attacktype1
-## 1         1        0       1       0           7
-## 2         0        0       1       0           7
-## 3         0        0       1       0           2
-## 4         0        1       1       0           3
-## 5         0        1       1       0           3
-##                  attacktype1_txt targtype1                  targtype1_txt
-## 1 Facility/Infrastructure Attack        15 Religious Figures/Institutions
-## 2 Facility/Infrastructure Attack         2           Government (General)
-## 3                  Armed Assault        14    Private Citizens & Property
-## 4              Bombing/Explosion        15 Religious Figures/Institutions
-## 5              Bombing/Explosion        15 Religious Figures/Institutions
-##   targsubtype1                    targsubtype1_txt
-## 1           86                    Place of Worship
-## 2           21 Government Building/Facility/Office
-## 3           71           Race/Ethnicity Identified
-## 4           85                    Religious Figure
-## 5           85                    Religious Figure
-##                                     corp1                          target1
-## 1  Glover Grove Missionary Baptist Church                           Church
-## 2 United States Fish and Wildlife Service Malheur National Wildlife Refuge
-## 3                          Not Applicable               Hispanic Civilians
-## 4                                 Unknown         Rabbi: Avremel Kotlarsky
-## 5                                 Unknown        Rabbi: Simcha Morgenstern
-##                                 gname individual nperps nperpcap claimed
-## 1                             Unknown          0    -99        0       0
-## 2 Citizens for Constitutional Freedom          0     12       11       1
-## 3                    White extremists          1      3        3       0
-## 4                             Unknown          0      4        0       0
-## 5                             Unknown          0    -99        0       0
-##   weaptype1             weaptype1_txt weapsubtype1
-## 1         8                Incendiary           18
-## 2         5                  Firearms            2
-## 3         9                     Melee           23
-## 4         6 Explosives/Bombs/Dynamite           17
-## 5         6 Explosives/Bombs/Dynamite           17
-##              weapsubtype1_txt nkill nwound property propextent
-## 1                  Arson/Fire     0      0        1          3
-## 2            Automatic Weapon     0      0        0         NA
-## 3 Knife or Other Sharp Object     0      3        0         NA
-## 4        Other Explosive Type     0      0        1          3
-## 5        Other Explosive Type     0      0       -9         NA
-##                propextent_txt propvalue
-## 1 Minor (likely < $1 million)       -99
-## 2                                    NA
-## 3                                    NA
-## 4 Minor (likely < $1 million)       -99
-## 5                                    NA
-##                                     propcomment
-## 1 A church building was damaged in this attack.
-## 2                                              
-## 3                                              
-## 4           Shrubs were damaged in this attack.
-## 5                                              
-##                                                                                                                    scite1
-## 1                                                                   "Fires at churches in spotlight," CNN, June 29, 2015.
-## 2              "Protesters occupy Oregon wildlife refuge as dispute over Western range flares," Reuters, January 3, 2016.
-## 3  "3 men are charged with hate crimes in an attack on Latinos at an L.A. County park," Los Angeles Times, March 3, 2016.
-## 4 "Homes of Two New York Rabbis Hit in Alleged Coordinated Firecracker Attack," Five Towns Jewish Times, August 12, 2016.
-## 5 "Homes of Two New York Rabbis Hit in Alleged Coordinated Firecracker Attack," Five Towns Jewish Times, August 12, 2016.
-##   observation       date POPESTIMATE2013 POPESTIMATE2014 POPESTIMATE2015
-## 1          59 2015-06-26              NA              NA              NA
-## 2          86 2016-01-02              NA              NA              NA
-## 3          91 2016-02-28              NA              NA              NA
-## 4         119 2016-08-09              NA              NA              NA
-## 5         120 2016-08-09              NA              NA              NA
-##   POPESTIMATE2016 state   county PCTPOVALL_2015 PCTPOV017_2015
-## 1              NA    SC    Aiken           18.1           27.1
-## 2              NA    OR   Harney           16.3           25.5
-## 3              NA  <NA>     <NA>             NA             NA
-## 4              NA    NY Rockland           14.0           23.0
-## 5              NA    NY Rockland           14.0           23.0
-##   MEDHHINC_2015
-## 1         48012
-## 2         40468
-## 3            NA
-## 4         84249
-## 5         84249
+## # A tibble: 4 x 6
+## # Groups:   provstate, city, POPESTIMATE2013, POPESTIMATE2014,
+## #   POPESTIMATE2015 [4]
+##   provstate city  POPESTIMATE2013 POPESTIMATE2014 POPESTIMATE2015
+##   <chr>     <chr>           <int>           <int>           <int>
+## 1 Californ… Lake…              NA              NA              NA
+## 2 New York  New …              NA              NA              NA
+## 3 Oregon    Prin…              NA              NA              NA
+## 4 South Ca… Warr…              NA              NA              NA
+## # … with 1 more variable: POPESTIMATE2016 <int>
 ```
 The cities we originally had NA for were New York City, Macon, Warrenville, Ingelwood, Princeton, Lake Los Angeles, and New City.
 
@@ -365,122 +281,21 @@ Now we will check for spelling differences in the poverty data set and see if th
 
 ```r
 midterm_data_ethan37_1 %>%
+  group_by(provstate, city, PCTPOV017_2015, PCTPOVALL_2015, MEDHHINC_2015) %>%
+  summarise()%>%
   filter(is.na(PCTPOV017_2015) | is.na(PCTPOVALL_2015) | is.na(MEDHHINC_2015))
 ```
 
 ```
-##   iyear imonth iday    provstate             city latitude  longitude
-## 1  2014      4   13       Kansas    Overland Park 38.98223  -94.67079
-## 2  2014      4   13       Kansas    Overland Park 38.98223  -94.67079
-## 3  2014      8   11        Texas          Corinth 33.15407  -97.06438
-## 4  2014      9   12 Pennsylvania   Blooming Grove 41.37012  -75.15407
-## 5  2015     12   30 Pennsylvania         Colerain 39.89607  -76.05645
-## 6  2015     12   30 Pennsylvania         Colerain 39.89607  -76.05645
-## 7  2016      2   28   California Lake Los Angeles 34.60598 -117.82995
-##   vicinity
-## 1        0
-## 2        0
-## 3        0
-## 4        0
-## 5        0
-## 6        0
-## 7        0
-##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     summary
-## 1                                                                                                  04/13/2014: An assailant opened fire on civilians outside of a Jewish community center in Overland Park, Kansas, United States. Two people were killed in the attack. This was one of two attacks carried out by the assailant within a few minutes of each other in the same area; the assailant targeted a nearby retirement home in the second attack. No group claimed responsibility for the incident; however, officials arrested a former Ku Klux Klan member who had shouted "Heil Hitler" following the arrest.
-## 2                                                                                                  04/13/2014: An assailant opened fire on civilians outside of a Jewish retirement home in Overland Park, Kansas, United States. One person was killed in the attack. This was one of two incidents carried out by the assailant within a few minutes of each other in the same area; the assailant targeted a nearby community center in the first attack. No group claimed responsibility for the incident; however, officials arrested a former Ku Klux Klan member who had shouted "Heil Hitler" following the arrest.
-## 3 08/11/2014: An assailant, identified as Douglas Leguin, opened fire on firefighters and police officers in Dallas, Texas, United States. Leguin, who was armed with an AK-47, propane tanks and bottles containing flammable liquid, approached and intended to occupy a residence with an eight-year-old girl and her nanny trapped inside. No casualties were reported. After an exchange of fire, Leguin was captured by police. Douglas Leguin, who identified as a member of Sovereign Citizen, claimed responsibility for the incident and stated that the attack was carried out in order to get citizens to vote.
-## 4                                                                                                                                                                                                                                       09/12/2014: An assailant opened fire at state troopers at the barracks in Blooming Grove, Pennsylvania, United States. One trooper was killed and another was wounded in the attack. A lone individual, Eric Frein, claimed responsibility for the incident. In a letter he wrote to his parents, Frein indicated that he was looking to spark a revolution against the government.
-## 5                                                                                                                                                                                                                                                                                                                                                12/30/2015: Assailants detonated an explosive device in an Amish phone shed in Colerain, Pennsylvania, United States. There were no reported casualties; however, the shed was destroyed in the blast. Daniel Tate and Caleb Tate claimed responsibility for the incident.
-## 6                                                                                                                                                                                                                                                                                                                                                12/30/2015: Assailants detonated an explosive device in an Amish phone shed in Colerain, Pennsylvania, United States. There were no reported casualties; however, the shed was destroyed in the blast. Daniel Tate and Caleb Tate claimed responsibility for the incident.
-## 7                                                                                                           02/28/2016: Three assailants armed with knives attacked a group of Hispanic teenagers playing soccer at Stephen Sorensen Park in Lake Los Angeles, California, United States. At least two people suffered minor injuries in the assault. The three assailants, identified as Ian Justine Plankey, Richard Lawrence Daulton, and Kevin Matthew Stewart, were arrested following the incident. During the attack, they shouted white supremacist statements and racial slurs, including "Heil Hitler, AV Skins."
-##   doubtterr multiple success suicide attacktype1   attacktype1_txt
-## 1         0        1       1       0           2     Armed Assault
-## 2         0        1       1       0           2     Armed Assault
-## 3         0        0       1       0           3 Bombing/Explosion
-## 4         0        0       1       0           2     Armed Assault
-## 5         0        0       1       0           3 Bombing/Explosion
-## 6         0        0       1       0           3 Bombing/Explosion
-## 7         0        0       1       0           2     Armed Assault
-##   targtype1                  targtype1_txt targsubtype1
-## 1        15 Religious Figures/Institutions           87
-## 2        15 Religious Figures/Institutions           87
-## 3         3                         Police           25
-## 4         3                         Police           22
-## 5        14    Private Citizens & Property           69
-## 6        14    Private Citizens & Property           69
-## 7        14    Private Citizens & Property           71
-##                                  targsubtype1_txt
-## 1                          Affiliated Institution
-## 2                          Affiliated Institution
-## 3                 Police Security Forces/Officers
-## 4 Police Building (headquarters, station, school)
-## 5                             Religion Identified
-## 6                             Religion Identified
-## 7                       Race/Ethnicity Identified
-##                                            corp1                 target1
-## 1 Jewish Community Center of Greater Kansas City        Community Center
-## 2                                 Village Shalom  Jewish Retirement Home
-## 3                       Dallas Police Department                Officers
-## 4                Pennsylvania State Police (PSP) Blooming Grove Barracks
-## 5                                 Not Applicable        Amish Phone Shed
-## 6                                 Not Applicable        Amish Phone Shed
-## 7                                 Not Applicable      Hispanic Civilians
-##                        gname individual nperps nperpcap claimed weaptype1
-## 1           White extremists          1      1        1       1         5
-## 2           White extremists          1      1        1       1         5
-## 3          Sovereign Citizen          0      1        0       1         6
-## 4 Anti-Government extremists          1      1        1       1         5
-## 5                    Unknown          1      2        2       1         6
-## 6                    Unknown          1      2        2       1         6
-## 7           White extremists          1      3        3       0         9
-##               weaptype1_txt weapsubtype1              weapsubtype1_txt
-## 1                  Firearms            3                       Handgun
-## 2                  Firearms            3                       Handgun
-## 3 Explosives/Bombs/Dynamite           17          Other Explosive Type
-## 4                  Firearms            4 Rifle/Shotgun (non-automatic)
-## 5 Explosives/Bombs/Dynamite           17          Other Explosive Type
-## 6 Explosives/Bombs/Dynamite           17          Other Explosive Type
-## 7                     Melee           23   Knife or Other Sharp Object
-##   nkill nwound property propextent              propextent_txt propvalue
-## 1     2      0        0         NA                                    NA
-## 2     1      0        0         NA                                    NA
-## 3     0      0        1          3 Minor (likely < $1 million)       -99
-## 4     1      1        0         NA                                    NA
-## 5     0      0        1          3 Minor (likely < $1 million)       -99
-## 6     0      0        1          3 Minor (likely < $1 million)       -99
-## 7     0      3        0         NA                                    NA
-##                               propcomment
-## 1                                        
-## 2                                        
-## 3 A firetruck was damaged in this attack.
-## 4                                        
-## 5      A shed was damaged in this attack.
-## 6      A shed was damaged in this attack.
-## 7                                        
-##                                                                                                                    scite1
-## 1                                             "Judge sentences Frazier Glenn Cross to death," CNN.com, November 11, 2015.
-## 2                                             "Judge sentences Frazier Glenn Cross to death," CNN.com, November 11, 2015.
-## 3                               "Cops: Man fires AK-47 at authorities; says he meant no harm," CBS News, August 18, 2014.
-## 4                                 "Suspected Pennsylvania cop killer charged with terrorism," CNN.com, November 14, 2014.
-## 5 "Police arrest twin brothers for setting off IEDs in Pennsylvania during college break," Washington Post, May 18, 2016.
-## 6 "Police arrest twin brothers for setting off IEDs in Pennsylvania during college break," Washington Post, May 18, 2016.
-## 7  "3 men are charged with hate crimes in an attack on Latinos at an L.A. County park," Los Angeles Times, March 3, 2016.
-##   observation       date POPESTIMATE2013 POPESTIMATE2014 POPESTIMATE2015
-## 1          23 2014-04-13          181022          184111          186051
-## 2          24 2014-04-13          181022          184111          186051
-## 3          32 2014-08-11           20597           20824           20957
-## 4          34 2014-09-12            4741            4708            4690
-## 5          84 2015-12-30            1179            1182            1178
-## 6          84 2015-12-30            3733            3750            3793
-## 7          91 2016-02-28              NA              NA              NA
-##   POPESTIMATE2016 state county PCTPOVALL_2015 PCTPOV017_2015 MEDHHINC_2015
-## 1          188966  <NA>   <NA>             NA             NA            NA
-## 2          188966  <NA>   <NA>             NA             NA            NA
-## 3           21078  <NA>   <NA>             NA             NA            NA
-## 4            4668  <NA>   <NA>             NA             NA            NA
-## 5            1174  <NA>   <NA>             NA             NA            NA
-## 6            3839  <NA>   <NA>             NA             NA            NA
-## 7              NA  <NA>   <NA>             NA             NA            NA
+## # A tibble: 5 x 5
+## # Groups:   provstate, city, PCTPOV017_2015, PCTPOVALL_2015 [5]
+##   provstate    city             PCTPOV017_2015 PCTPOVALL_2015 MEDHHINC_2015
+##   <chr>        <chr>                     <dbl>          <dbl>         <dbl>
+## 1 California   Lake Los Angeles             NA             NA            NA
+## 2 Kansas       Overland Park                NA             NA            NA
+## 3 Pennsylvania Blooming Grove               NA             NA            NA
+## 4 Pennsylvania Colerain                     NA             NA            NA
+## 5 Texas        Corinth                      NA             NA            NA
 ```
 The cities we originally had NA for were West, TX; McCook, NE; Washington, DC; New York City, NY; Overland Park, KS; Corinth, TX; Blooming Grove, PA; Aurora, IL; Ingelwood, CA; Colerain, PA; Lake Los Angeles, CA; Tyngsborough, MA; St. Louis, MO; Fort Pierce, FL; St. Cloud, MN;
 
@@ -602,7 +417,8 @@ midterm_data_ethan37 <- GTD %>%
   mutate(date = make_date(iyear, imonth, iday))%>%
   left_join(county_pop, by = c("city", "provstate" = "state_name" )) %>%
   distinct()%>%
-  droplevels()
+  droplevels()%>%
+  ungroup()
 ```
 
 ```
@@ -824,6 +640,7 @@ states_population
 ```
 
 ![](first-midterm_files/figure-html/plot-of-US-population-1.png)<!-- -->
+
 ([making maps](https://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html)) 
 From this map, it does not seem like population has a relationship with the occurance of terrorists attacks, with the exception of New York City. If population did have a relationship with the occurance of terrorist attacks, every large point would be very dark, like in New York, but this is not the case.
 
@@ -887,6 +704,8 @@ Now we will look at how many times of each type of incident happen per month by 
 incidents_by_type_indivual <- midterm_data_ethan37 %>%
   group_by(month = month(imonth, label = TRUE), attacktype1_txt, individual) %>%
   summarise(count = n()) %>%
+  mutate(individual = case_when( individual == 1 ~ "Yes",
+                               individual == 0 ~ "No"))%>%
   ggplot() +
   geom_bar(mapping = aes(x = month, 
                          y = count, 
@@ -912,6 +731,8 @@ We will again look at the amount of attack per month by the type of the attack, 
 incidents_by_type_claimed <- midterm_data_ethan37 %>%
   group_by(month = month(imonth, label = TRUE), attacktype1_txt, claimed) %>%
   summarise(count = n()) %>%
+  mutate(claimed = case_when( claimed == 1 ~ "Yes",
+                               claimed == 0 ~ "No"))%>%
   ggplot() +
   geom_bar(mapping = aes(x = month, 
                          y = count, 
@@ -938,7 +759,7 @@ wounded_killed_population <- midterm_data_ethan37 %>%
   group_by(nwound, nkill, population_estimate) %>%
   summarise(wounded_killed = sum(nwound, nkill)) %>%
   ggplot() +
-  geom_point(mapping = aes(x = population_estimate, y = wounded_killed)) +
+  geom_point(mapping = aes(x = population_estimate, y = wounded_killed), alpha = .4) +
   scale_x_log10() +
   labs(title = "Population and amount of people wounded or killed",
        x = "log10 of population",
@@ -958,7 +779,7 @@ wounded_killed_PCTPOVALL <- midterm_data_ethan37 %>%
   group_by(nwound, nkill, PCTPOVALL_2015) %>%
   summarise(wounded_killed = sum(nwound, nkill)) %>%
   ggplot() +
-  geom_point(mapping = aes(x = PCTPOVALL_2015, y = wounded_killed)) +
+  geom_point(mapping = aes(x = PCTPOVALL_2015, y = wounded_killed), alpha = .4) +
   labs(title = "Percent of all residents in poverty and amount of people wounded or killed",
        x = "Percent of all residents living in poverty",
        y = "Amount of people wounded or killed")
@@ -977,7 +798,7 @@ wounded_killed_PCTPOV017 <- midterm_data_ethan37 %>%
   group_by(nwound, nkill, PCTPOV017_2015) %>%
   summarise(wounded_killed = sum(nwound, nkill)) %>%
   ggplot() +
-  geom_point(mapping = aes(x = PCTPOV017_2015, y = wounded_killed)) +
+  geom_point(mapping = aes(x = PCTPOV017_2015, y = wounded_killed), alpha = .3) +
   labs(title = "Percent of residents 17 and under in poverty and amount of people wounded or
        killed",
        x = "Percent of residents 17 and under living in poverty",
@@ -997,7 +818,7 @@ wounded_killed_MEDHHINC <- midterm_data_ethan37 %>%
   group_by(nwound, nkill, MEDHHINC_2015, gname) %>%
   summarise(wounded_killed = sum(nwound, nkill)) %>%
   ggplot() +
-  geom_point(mapping = aes(x = MEDHHINC_2015, y = wounded_killed, label = gname)) +
+  geom_point(mapping = aes(x = MEDHHINC_2015, y = wounded_killed, label = gname), alpha = .3) +
   labs(title = "Percent of residents 17 and under in poverty and amount of people wounded or
        killed",
        x = "Median household income",

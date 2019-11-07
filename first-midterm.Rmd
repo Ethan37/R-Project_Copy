@@ -68,7 +68,8 @@ Now we will clean the GTD data set. All this entails is adding an observation co
 ```{r cleaning-GTD}
 GTD <- GTD %>%
   mutate(observation = row_number())
-
+  
+  
 ```
 
 Now we will clean the population data set. To do this we change some words in the data set so that they merge properly, and we also take out unnecessary variables so that it merges properly.
@@ -106,6 +107,8 @@ Now it is time to clean our final data set.
 First, we will check for spelling differences and see if that fixes why we have NA for the population estimates for some rows.
 ```{r cleaning-final-data-set-pop1}
 midterm_data_ethan37_1 %>%
+  group_by(provstate, city, POPESTIMATE2013, POPESTIMATE2014, POPESTIMATE2015, POPESTIMATE2016) %>%
+  summarise()%>%
   filter(is.na(POPESTIMATE2013) | is.na(POPESTIMATE2014) | is.na(POPESTIMATE2015) | is.na(POPESTIMATE2016))
   
 ```
@@ -175,6 +178,8 @@ Now we will check for spelling differences in the poverty data set and see if th
 
 ```{r cleaning-final-data-set-pov1}
 midterm_data_ethan37_1 %>%
+  group_by(provstate, city, PCTPOV017_2015, PCTPOVALL_2015, MEDHHINC_2015) %>%
+  summarise()%>%
   filter(is.na(PCTPOV017_2015) | is.na(PCTPOVALL_2015) | is.na(MEDHHINC_2015))
 ```
 The cities we originally had NA for were West, TX; McCook, NE; Washington, DC; New York City, NY; Overland Park, KS; Corinth, TX; Blooming Grove, PA; Aurora, IL; Ingelwood, CA; Colerain, PA; Lake Los Angeles, CA; Tyngsborough, MA; St. Louis, MO; Fort Pierce, FL; St. Cloud, MN;
@@ -295,7 +300,8 @@ midterm_data_ethan37 <- GTD %>%
   mutate(date = make_date(iyear, imonth, iday))%>%
   left_join(county_pop, by = c("city", "provstate" = "state_name" )) %>%
   distinct()%>%
-  droplevels()
+  droplevels()%>%
+  ungroup()
 
 ```
 
@@ -412,6 +418,7 @@ states_population <- states_blank +
 
 states_population
 ```
+
 ([making maps](https://eriqande.github.io/rep-res-web/lectures/making-maps-with-R.html)) 
 From this map, it does not seem like population has a relationship with the occurance of terrorists attacks, with the exception of New York City. If population did have a relationship with the occurance of terrorist attacks, every large point would be very dark, like in New York, but this is not the case.
 
@@ -465,6 +472,8 @@ Now we will look at how many times of each type of incident happen per month by 
 incidents_by_type_indivual <- midterm_data_ethan37 %>%
   group_by(month = month(imonth, label = TRUE), attacktype1_txt, individual) %>%
   summarise(count = n()) %>%
+  mutate(individual = case_when( individual == 1 ~ "Yes",
+                               individual == 0 ~ "No"))%>%
   ggplot() +
   geom_bar(mapping = aes(x = month, 
                          y = count, 
@@ -487,6 +496,8 @@ We will again look at the amount of attack per month by the type of the attack, 
 incidents_by_type_claimed <- midterm_data_ethan37 %>%
   group_by(month = month(imonth, label = TRUE), attacktype1_txt, claimed) %>%
   summarise(count = n()) %>%
+  mutate(claimed = case_when( claimed == 1 ~ "Yes",
+                               claimed == 0 ~ "No"))%>%
   ggplot() +
   geom_bar(mapping = aes(x = month, 
                          y = count, 
@@ -510,7 +521,7 @@ wounded_killed_population <- midterm_data_ethan37 %>%
   group_by(nwound, nkill, population_estimate) %>%
   summarise(wounded_killed = sum(nwound, nkill)) %>%
   ggplot() +
-  geom_point(mapping = aes(x = population_estimate, y = wounded_killed)) +
+  geom_point(mapping = aes(x = population_estimate, y = wounded_killed), alpha = .4) +
   scale_x_log10() +
   labs(title = "Population and amount of people wounded or killed",
        x = "log10 of population",
@@ -527,7 +538,7 @@ wounded_killed_PCTPOVALL <- midterm_data_ethan37 %>%
   group_by(nwound, nkill, PCTPOVALL_2015) %>%
   summarise(wounded_killed = sum(nwound, nkill)) %>%
   ggplot() +
-  geom_point(mapping = aes(x = PCTPOVALL_2015, y = wounded_killed)) +
+  geom_point(mapping = aes(x = PCTPOVALL_2015, y = wounded_killed), alpha = .4) +
   labs(title = "Percent of all residents in poverty and amount of people wounded or killed",
        x = "Percent of all residents living in poverty",
        y = "Amount of people wounded or killed")
@@ -543,7 +554,7 @@ wounded_killed_PCTPOV017 <- midterm_data_ethan37 %>%
   group_by(nwound, nkill, PCTPOV017_2015) %>%
   summarise(wounded_killed = sum(nwound, nkill)) %>%
   ggplot() +
-  geom_point(mapping = aes(x = PCTPOV017_2015, y = wounded_killed)) +
+  geom_point(mapping = aes(x = PCTPOV017_2015, y = wounded_killed), alpha = .3) +
   labs(title = "Percent of residents 17 and under in poverty and amount of people wounded or
        killed",
        x = "Percent of residents 17 and under living in poverty",
@@ -560,7 +571,7 @@ wounded_killed_MEDHHINC <- midterm_data_ethan37 %>%
   group_by(nwound, nkill, MEDHHINC_2015, gname) %>%
   summarise(wounded_killed = sum(nwound, nkill)) %>%
   ggplot() +
-  geom_point(mapping = aes(x = MEDHHINC_2015, y = wounded_killed, label = gname)) +
+  geom_point(mapping = aes(x = MEDHHINC_2015, y = wounded_killed, label = gname), alpha = .3) +
   labs(title = "Percent of residents 17 and under in poverty and amount of people wounded or
        killed",
        x = "Median household income",
