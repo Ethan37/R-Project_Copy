@@ -3,8 +3,8 @@ title: "First Midterm"
 author: "Ethan Brown"
 date: "10/20/2019"
 output: 
-  pdf_document: 
-    
+  html_document: 
+    keep_md: yes
 ---
 
 
